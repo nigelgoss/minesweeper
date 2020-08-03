@@ -7,7 +7,7 @@ beforeAll(async () => {
 describe('Test header and title of the page', () => {
     test('Title of the page', async () => {
         const title = await page.title();
-        wait page.screenshot({path: 'homepage.png'});   
+        await page.screenshot({path: 'homepage.png'});   
         expect(title).toBe('E2E Puppeteer Testing');
         
     }, timeout);
