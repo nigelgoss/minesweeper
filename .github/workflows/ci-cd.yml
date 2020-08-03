@@ -15,7 +15,7 @@ jobs:
         local-dir: wwwroot/
         ftp-server: ftp://ftp.apps.nigelgoss.co.uk/minesweeper/dev/
         ftp-username: apps.nigelgoss.co.uk
-        ftp-password: ${{ secrets.FTP_PASSWORD }}:
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
   
   Unit-Tests:
     runs-on: ubuntu-latest
