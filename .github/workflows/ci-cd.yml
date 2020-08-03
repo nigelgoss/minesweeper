@@ -38,6 +38,9 @@ jobs:
         
       - name: npm test
         run: npm test
+      
+      - name: extract schreenshots
+        uses: actions/download-artifact@v2
 
   Prod-Deploy:
     name: Prod-Deploy
