@@ -1,0 +1,39 @@
+name: Node CI-CD
+
+on: [push]
+
+jobs:
+  
+  Unit-Tests:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout source code
+        uses: actions/checkout@v1
+      
+      - name: Setup Node js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      
+      - name: npm install
+        run: npm install
+              
+      - name: npm build
+        run: npm run build --if-present
+        
+      - name: npm test
+        run: npm test
+
+  FTP-Deploy:
+    name: FTP-Deploy
+    needs: [ Unit-Tests ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      with:
+        ftp-server: ftp://ftp.apps.nigelgoss.co.uk/minesweeper/
+        ftp-username: apps.nigelgoss.co.uk
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
