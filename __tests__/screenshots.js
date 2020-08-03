@@ -1,22 +1,13 @@
-const puppeteer = require("puppeteer");
+const timeout = process.env.SLOWMO ? 30000 : 10000;
 
-describe('Analytics', () => {
-  beforeAll(async () => {     
-    await page.goto('https://designisdead.com/')   
-  })    
+beforeAll(async () => {
+    await page.goto(URL, {waitUntil: 'domcontentloaded'});
+});
 
-  it('should return google tag manager', async () => {     
-    const tagManager = await page.evaluate(() => google_tag_manager)     
-    expect(tagManager).toBeDefined()   
-  }) 
-})
-
-
-(async () => {   
-   const browser = await puppeteer.launch();   
-   const page = await browser.newPage();   
-   await page.goto("http://apps.nigelgoss.co.uk/minesweeper/");   
-   await page.screenshot({path: "homepage.png"});    
-
-   await browser.close(); 
-})();
+describe('Test header and title of the page', () => {
+    test('Title of the page', async () => {
+        const title = await page.title();
+        expect(title).toBe('E2E Puppeteer Testing');
+        
+    }, timeout);
+});
