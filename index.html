@@ -1,0 +1,103 @@
+<style>
+body { display:grid; place-items:center; height:100%; margin:0; }
+main { height:600px; width:600px; }
+div { display:grid; place-items:center; border:1px solid lightgrey; }
+.c-x { background-color:red; }
+.c-0 { background-color:grey; }
+.c-1 { background-color:yellow; }
+.c-2 { background-color:orange; }
+.c-3 { background-color:red; }
+.c-4 { background-color:purple; }
+</style>
+
+<main></main>
+
+<script>
+
+const w = 20;
+const h = 20;
+const b = 10;
+
+let gameOver = false;
+let ele = [];
+
+const borderingCells = $id => {
+
+	const rowDiff = $x => {
+		if ($x < 0 || $x >= w * h) return null;
+		return parseInt($x / w) - parseInt($id / w);
+	};
+
+	let d = [$id];
+
+	let x = $id - w - 1; if ( rowDiff(x) === -1 ) d.push(x);
+	x = $id - w; if ( rowDiff(x) === -1 ) d.push(x);
+	x = $id - w + 1; if ( rowDiff(x) === -1 ) d.push(x);
+	x = $id - 1; if ( rowDiff(x) === 0 ) d.push(x);
+	x = $id + 1; if ( rowDiff(x) === 0 ) d.push(x);
+	x = $id + w - 1; if ( rowDiff(x) === 1 ) d.push(x);
+	x = $id + w; if ( rowDiff(x) === 1 ) d.push(x);
+	x = $id + w + 1; if ( rowDiff(x) === 1 ) d.push(x);
+
+	return d;
+	
+}; 
+
+const main = document.querySelector("main");
+main.style.display = "grid";
+main.style.gridGap = "2px";
+main.style.gridTemplateColumns = "repeat(" + w.toString() + ", 1fr)";
+main.style.gridTemplateRows = "repeat(" + h.toString() + ", 1fr)";
+
+let data = [
+	...Array(b).fill("X"),
+	...Array(w * h - b).fill(null)
+];
+
+for (let $i = 0; $i < data.length; $i++) {
+	let rand = Math.floor(Math.random() * w * h);
+	let temp = data[$i];
+	data[$i] = data[rand];
+	data[rand] = temp;
+};
+
+for (let $i = 0; $i < data.length; $i++) {
+	if (data[$i] === "X") continue;
+	let count = 0;
+	borderingCells($i).forEach($v => { if (data[$v] === "X") count++; });
+	data[$i] = count;
+};
+
+const clickCell = $id => {
+	if (ele[$id].classList.length !== 0) return;
+	ele[$id].textContent = (data[$id] === 0) ? "" : data[$id];
+	ele[$id].classList.add("c-" + data[$id]);
+	if (data[$id] === 0) borderingCells($id).forEach($v => { clickCell($v); });
+};
+
+data.forEach(($v, $i) => {	
+
+	let div = document.createElement("div"); main.appendChild(div);
+	ele.push(div);
+	div.onclick = () => {
+	
+		if (gameOver === true) return;
+
+		if ($v === "X") {
+			alert("Lose");
+			gameOver = true;
+		} else {;
+			clickCell($i);
+		};
+		
+		if (main.querySelectorAll("*:not([class])").length === b) {
+			alert("WIN");
+			gameOver = true;
+			return;
+		};
+
+	};
+	
+});
+
+</script>
