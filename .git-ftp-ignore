@@ -1,9 +1,2 @@
 .git-ftp-ignore
-
-
-.gitignore
-*/.gitignore      # ignore files in sub directories
-*/.gitkeep
-
-.git-ftp-include
-.gitlab-ci.yml
+.github/*
