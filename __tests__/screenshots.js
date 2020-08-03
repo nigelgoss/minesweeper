@@ -9,7 +9,7 @@ describe('Test header and title of the page', () => {
     test('Title of the page', async () => {
         const title = await page.title();
         await page.screenshot({path: 'homepage.png'});
-        expect(title).toBe('E2E Puppeteer Testing');
+        expect(title).toBe('Minesweeper');
     }, timeout);  
     
 });
