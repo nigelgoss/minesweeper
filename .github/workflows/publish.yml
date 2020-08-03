@@ -1,0 +1,20 @@
+on: push
+name: Publish Website over SFTP
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.1.0
+      with:
+        fetch-depth: 2
+
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      with:
+        ftp-server: ${{ secrets.SFTP_URL }}
+        ftp-username: ${{ secrets.SFTP_USERNAME }}
+        ftp-password: ${{ secrets.SFTP_PASSWORD }}
+        # known-hosts: [ssh.apps.nigelgoss.co.uk]:22 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAQ6r11USXbE19CLVVFgpaey7BeADeEHsOljpj4mvOcBZ6VlNDrGS9Vqv+zT4eI6osB4srW8vjAAM/eerW6kLrLsyIgkXezTKiXje5/vxxNzeb9lq9fPZ6TiOIwQH96PlbQyt0WGB/YRhUTLBe0itjuL0BnwUWiT2oZ1Fn6KMnEg3dUVf7IPk2HSXdn53R29HWgZXxHbf4T/CSyGjEAjG64fuN9HMXUFjpiTHdtBDwHPlUZsrlwJkazDsqRtvYV4Kac0I/X1pyJ2J29OLeYc94QItk/r3l38PcvtMgKyaVAur0fybRJmwqC326rZC3EnpiCfonERIRvMPWdUMmuZtv
+        # add the following line instead  if your certificate is setup incorrectly
+        git-ftp-args: --insecure 
