@@ -11,6 +11,6 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
-        ftp-server: ftp://ftp.apps.nigelgoss.co.uk/htdocs/minesweeper/
+        ftp-server: ftp://ftp.apps.nigelgoss.co.uk/minesweeper/
         ftp-username: apps.nigelgoss.co.uk
         ftp-password: ${{ secrets.FTP_PASSWORD }}
