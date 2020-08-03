@@ -3,7 +3,9 @@
     "test": "jest"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
-    "puppeteer": "^2.0.0"
+    "jest": "^25.1.0",
+    "puppeteer": "^2.1.1",
+    "jest-puppeteer": "^4.4.0",
+  "pixelmatch": "^5.1.0",
   }
 }
