@@ -15,4 +15,4 @@ jobs:
           name: Run E2E
           command: node e2e.js
       - store_artifacts:
-          path: /example.png
+          path: example.png
