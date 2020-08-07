@@ -14,6 +14,5 @@ jobs:
       - run:
           name: Run E2E
           command: node e2e.js
-    artifacts:
-      - example.png
-      - example1.png
+      - store_artifacts:
+          path: /
