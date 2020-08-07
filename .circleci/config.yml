@@ -11,3 +11,9 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+      - run:
+          name: Run E2E
+          command: node e2e.js
+      artifacts:
+          - example.png
+          - example1.png
